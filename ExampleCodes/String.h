@@ -7,7 +7,7 @@ namespace samples {
 		String(const String& str); //Copy Constructor
 		~String(); //Destructor
 
-		void print();
+		void print() const;
 	private:
 		char* mString;
 		size_t mSize;

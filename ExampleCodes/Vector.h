@@ -1,7 +1,9 @@
 #pragma once
+#include <iostream>
 namespace samples {
 	class Vector
 	{
+		friend std::ostream& operator<<(std::ostream& os, const Vector& rhs);
 	public:
 		Vector();
 		Vector(int x, int y);

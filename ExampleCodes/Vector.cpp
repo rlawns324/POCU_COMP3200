@@ -63,3 +63,9 @@ void samples::Vector::Scale(int multiplier)
 Vector::~Vector()
 {
 }
+
+std::ostream& samples::operator<<(std::ostream & os, const Vector & rhs)
+{
+	os << rhs.mX << ", " << rhs.mY;
+	return os;
+}
