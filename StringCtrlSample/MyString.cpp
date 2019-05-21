@@ -7,15 +7,23 @@ CMyString::CMyString()
 {
 }
 
-CMyString::CMyString(const CMyString & rhs)
+CMyString::CMyString(const char * pszParam):m_pszData(NULL),m_nLength(0)
 {
-	Release();
-	if (NULL == rhs.m_pszData) return;
-	int nLength = rhs.m_nLength;
-	if (0 == nLength) return;
-	m_pszData = new char[nLength + 1];
-	strcpy_s(m_pszData, nLength + 1, rhs.m_pszData);
-	m_nLength = nLength;
+	this->SetString(pszParam);
+}
+
+CMyString::CMyString(const CMyString & rhs):m_pszData(NULL),m_nLength(0)
+{
+	this->SetString(rhs.GetString());
+}
+
+CMyString::CMyString(CMyString && rhs):m_pszData(NULL),m_nLength(0)
+{
+	cout << "CMyString Move Constructor Call!" << endl;
+	m_pszData = rhs.m_pszData;
+	m_nLength = rhs.m_nLength;
+	rhs.m_pszData = NULL;
+	rhs.m_nLength = 0;
 }
 
 CMyString::~CMyString()
@@ -56,4 +64,9 @@ CMyString & CMyString::operator=(const CMyString & rhs)
 	strcpy_s(m_pszData, nLength + 1, rhs.m_pszData);
 	m_nLength = nLength;
 	return *this;
+}
+
+CMyString::operator char*() const
+{
+	return m_pszData;
 }
